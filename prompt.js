@@ -31,7 +31,6 @@ prompt = {
             );
 
             //error handling to make sure the bill amount is usable
-            //TODO: Add handling for people question
             if (value < 0) {
                 return prompt.query(prompt.text.errors[0], cb)
             } else if (isNaN(value)) {
