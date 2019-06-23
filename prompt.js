@@ -3,12 +3,14 @@ const readline = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout
 })
+//get users machine username
+const username = require("os").userInfo().username
 
 prompt = {
     //simple text used for the cli and user input functions
     text: {
         greetings: {
-            welcome: 'Hello, welcome to Bill Calculator! \n',
+            welcome: `Hello ${username} welcome to Bill Calculator! \n`,
             goodbye: 'Thank you for using Bill Calculator! \n'
         },
         queries: {
@@ -18,7 +20,7 @@ prompt = {
         },
         errors: {
             0: 'Sorry, number must be higher than 0. Please try again. \n',
-            1: 'Sorry, that is not a valid number. Please try again. \n'
+            1: 'Sorry, that is not a valid number. Please try again. \n',
         }
     },
     ask: (err, type, cb) => {
@@ -32,9 +34,9 @@ prompt = {
 
             //error handling to make sure the bill amount is usable
             if (value < 0) {
-                return prompt.query(prompt.text.errors[0], cb)
+                return prompt.query(prompt.text.errors[0], type, cb)
             } else if (isNaN(value)) {
-                return prompt.ask(prompt.text.errors[1], cb)
+                return prompt.ask(prompt.text.errors[1], type, cb)
             }
 
             return cb(value);
