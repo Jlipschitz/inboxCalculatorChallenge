@@ -11,7 +11,7 @@ prompt = {
     text: {
         greetings: {
             welcome: `Hello ${username} welcome to Bill Calculator! \n`,
-            goodbye: 'Thank you for using Bill Calculator! \n'
+            goodbye: '\n Thank you for using Bill Calculator!'
         },
         queries: {
             bill: 'What is your bill amount? \n',
