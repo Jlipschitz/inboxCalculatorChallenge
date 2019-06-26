@@ -11,11 +11,11 @@ prompt = {
     text: {
         greetings: {
             welcome: `Hello ${username} welcome to Bill Calculator! \n`,
-            goodbye: '\n Thank you for using Bill Calculator!'
+            goodbye: '\nThank you for using Bill Calculator!'
         },
         queries: {
             bill: 'What is your bill amount? \n',
-            tip: 'What tip percentage would you like to put? \n',
+            tip: 'What tip percentage would you like to tip? \n',
             split: 'How many will be splitting this bill? Please enter 0 if none.\n'
         },
         errors: {
@@ -34,13 +34,12 @@ prompt = {
 
             //error handling to make sure the bill amount is usable
             if (value < 0) {
-                return prompt.query(prompt.text.errors[0], type, cb)
+                return prompt.query(`Sorry, your ${type} amount must be higher than 0. Try again.`, type, cb)
             } else if (isNaN(value)) {
-                return prompt.ask(prompt.text.errors[1], type, cb)
+                return prompt.ask('Sorry, I did not understand that. Try again.', type, cb)
+            } else {
+                return cb(value);
             }
-
-            return cb(value);
-
         })
     },
     close: () => {
