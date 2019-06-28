@@ -12,6 +12,7 @@ prompt = {
             split: 'How many will be splitting this bill? Please enter 0 if none.\n'
         }
     },
+    recentBills: [],
     getInput: (err, type, callback) => {
         readline.question(!err ? prompt.text.queries[type] : err, (value) => {
 
@@ -34,19 +35,25 @@ prompt = {
             }
         })
     },
-    closeApplication: (runApplication) => {
-        //ask user if he would like calculate another bill and terminate tty stream if not
-        readline.question('Would you like to calculate another bill? \nType [Y]es or [N]o \n', (value) => {
+    closeApplication: (application) => {
+        //ask user if he would like calculate another bill or show recent bills and terminate tty stream if not
+        readline.question('Would you like to calculate another bill? \nType [Y]es to continue || [N]o to exit || [V]iew to show recent bills \n', (value) => {
             if (value.toLocaleLowerCase() === 'yes' || value.toLocaleLowerCase() === 'y') {
-                runApplication();
-            } else if (value.toLocaleLowerCase() === 'No' || value.toLocaleLowerCase() === 'n') {
+                application();
+            } else if (value.toLocaleLowerCase() === 'no' || value.toLocaleLowerCase() === 'n') {
                 console.log('\nThank you for using bill calculator. Goodbye!')
                 readline.close()
                 process.stdin.destroy();
+            } else if (value.toLocaleLowerCase() === 'view' || value.toLocaleLowerCase() === 'v') {
+                let i = 1;
+                prompt.recentBills.map((value, index) => {
+                    console.log(`${index == 0 ? 1 : index+1}. $${value}`)
+                });
+                prompt.closeApplication(application);
             } else {
                 //ask user again if input is otherwise
                 console.log('\nSorry, I did not understand that.')
-                prompt.closeApplication(runApplication);
+                prompt.closeApplication(application);
             }
         })
     }
