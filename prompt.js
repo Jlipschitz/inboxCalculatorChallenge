@@ -7,9 +7,9 @@ const readline = require('readline').createInterface({
 prompt = {
     text: {
         questions: {
-            bill: 'What is your bill amount? \n',
-            tip: 'What tip percentage would you like to tip? \n',
-            split: 'How many will be splitting this bill? Please enter 0 if none.\n'
+            bill: '\nWhat is your bill amount? \n',
+            tip: '\nWhat tip percentage would you like to tip? \n',
+            split: '\nHow many will be splitting this bill? Please enter 0 if none.\n'
         }
     },
     recentBills: [],
@@ -19,7 +19,7 @@ prompt = {
             let cleanUserInput = parseFloat(
                 userInput.replace(/[`~!@#$%^&*()_|+\=?;:'", <>\{\}\[\]\\\/]/gi, '')
             );
-
++6
             //show incorrect input text to user otherwise return input value
             if (cleanUserInput < 0) {
                 prompt.getInput(`Sorry, your ${type} must be higher than 0. Try again. \n`, type, callback)
@@ -46,11 +46,11 @@ prompt = {
             } else if (userInput.toLocaleLowerCase() === 'view' || userInput.toLocaleLowerCase() === 'v') {
                 //show recent bills with bill, tip, split (if any) and total
                 prompt.recentBills.map((value, index) => {
-                    console.log(`${index == 0 ? 1 : index + 1}.` 
-                    + `Bill amount: $${value.amount.bill} | ` 
-                    + `Tip amount: $${value.amount.tip} | `
-                    + `Split with: ${value.amount.split} people | `
-                    + `Total: $${value.amount.total}`)
+                    console.log(`\n${index == 0 ? 1 : index + 1}.`
+                        + `Bill amount: $${value.amount.bill} | `
+                        + `Tip amount: $${value.amount.tip} | `
+                        + `Split with: ${value.amount.split} people | `
+                        + `Total: $${value.amount.total}`)
                 });
                 prompt.closeApplication(application);
             } else {

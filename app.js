@@ -15,14 +15,14 @@ const startApplication = () => {
                     tip: totalBillValue * (totalTipPercentage / 100).toFixed(2),
                     split: totalSplitValue >= 2 ? totalSplitValue : 0,
                     total: totalSplitValue >= 2 ? parseFloat((totalBillValue + ((totalTipPercentage / 100) * totalBillValue)) / totalSplitValue).toFixed(2) :
-                    parseFloat(totalBillValue + ((totalTipPercentage / 100) * totalBillValue)).toFixed(2)
+                        parseFloat(totalBillValue + ((totalTipPercentage / 100) * totalBillValue)).toFixed(2)
                 }
 
                 //show the amounts that the person(s) owe
                 console.log(`\nYou ${totalSplitValue >= 2 ? 'each owe' : 'owe'}: $${amount.total}.`)
 
                 //store the bill caculated and ask user if he would like to calculate another bill
-                prompt.recentBills.push({amount})
+                prompt.recentBills.push({ amount })
                 prompt.closeApplication(startApplication);
             })
         })
